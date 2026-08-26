@@ -1,0 +1,20 @@
+public abstract class LogDecorator implements Log {
+
+    protected final Log componente;
+
+    protected LogDecorator(Log componente) {
+        this.componente = componente;
+    }
+
+    protected abstract String decorar(String m);
+
+    @Override
+    public void log(String m) {
+        componente.log(decorar(m));
+    }
+
+    @Override
+    public Iterator<String> iterator() {
+        return componente.iterator();   // delega, o for-each continua funcionando
+    }
+}

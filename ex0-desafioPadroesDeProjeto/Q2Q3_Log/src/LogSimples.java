@@ -1,22 +1,29 @@
-import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.util.Collections;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 
-public class LogSimples implements Iterable<String>{
-    private List<String> mensagens;
+public class LogSimples implements Log {
+    private static final LogSimples INSTANCIA = new LogSimples();
+    
+    private final List<String> mensagens;
 
-    public LogSimples(){
+    private LogSimples() {
         mensagens = new LinkedList<>();
     }
 
-    public void log(String m){
-        String logM = LocalDate.now().toString() + " : " + m;
-        mensagens.add(logM);
+    public static LogSimples getInstance() {
+        return INSTANCIA;
+    }
+
+    @Override
+    public void log(String m) {
+        mensagens.add(LocalDateTime.now() + " : " + m);
     }
 
     @Override
     public Iterator<String> iterator() {
-        return mensagens.iterator();
+        return Collections.unmodifiableList(mensagens).iterator();
     }
 }

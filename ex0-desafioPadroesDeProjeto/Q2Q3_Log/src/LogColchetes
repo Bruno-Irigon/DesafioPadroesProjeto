@@ -1,0 +1,6 @@
+public class LogColchetes extends LogDecorator {
+    public LogColchetes(Log componente) { super(componente); }
+
+    @Override
+    protected String decorar(String m) { return "[" + m + "]"; }
+}
