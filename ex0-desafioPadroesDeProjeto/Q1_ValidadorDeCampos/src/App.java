@@ -1,12 +1,14 @@
 public class App {
+     Validador validador = new Validador();
     public static void main(String[] args) throws Exception {
-        String email = "bernardo.copstein@pucrs.br";
         var validador = new Validador();
 
-        if (validador.valida(Validador.Tipo.EMAIL, email)){
-            System.out.println(email+" é um email válido!");
-        }else{
-            System.out.println(email+" não é um email válido!");
-        }
+        validador.setEstrategia(new ValidaEmail());
+        testa(validador, "Email", "bernardo.copstein@pucrs.br");
+        testa(validador, "Email", "copstein.pucrs.br");
+    }
+    public static void testa(Validador val, String tipo, String valor){
+        String resultado = val.valida( valor) ? "válido" : "inválido";
+        System.out.println("O valor "+ valor +" do tipo "+ tipo + " é "+ resultado);
     }
 }
